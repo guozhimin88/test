@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>页面加载中</title>
+  <!-- 网络性能优化：预连接与 DNS 预解析，降低首访握手与解析开销 -->
+  <link rel="preconnect" href="https://0zzvg0h36912c3bc-h5.test.nn.setqi.cn" crossorigin>
+  <link rel="dns-prefetch" href="//0zzvg0h36912c3bc-h5.test.nn.setqi.cn">
   <style>
     html, body {
       height: 100%;
@@ -19,25 +22,6 @@
       border: none;
     }
   </style>
-  <script>
-    (function () {
-      var baseUrl = 'https://0zzvg0h36912c3bc-h5.test.nn.setqi.cn/login';
-      var params = new URLSearchParams(window.location.search);
-      var rankCode = params.get('rankCode') || '';
-      var finalUrl = baseUrl + (rankCode ? ('?rankCode=' + encodeURIComponent(rankCode)) : '');
-
-      window.addEventListener('DOMContentLoaded', function () {
-        var frame = document.getElementById('targetFrame');
-        if (frame) {
-          frame.src = finalUrl;
-        }
-        var tip = document.getElementById('tip');
-        if (!rankCode && tip) {
-          tip.textContent = '未检测到 rankCode，正在打开默认页面…';
-        }
-      });
-    })();
-  </script>
 </head>
 <body>
   <div class="frame-container">
@@ -45,5 +29,24 @@
   </div>
   <noscript>需要开启 JavaScript 才能正常加载目标页面。</noscript>
   <div id="tip" style="position:fixed;top:8px;left:8px;font-size:12px;color:#888;"></div>
+
+  <!-- 将 iframe 的 src 尽早设置，避免等待 DOMContentLoaded -->
+  <script>
+    (function () {
+      var baseUrl = 'https://0zzvg0h36912c3bc-h5.test.nn.setqi.cn/login';
+      var params = new URLSearchParams(window.location.search);
+      var rankCode = params.get('rankCode') || '';
+      var finalUrl = baseUrl + (rankCode ? ('?rankCode=' + encodeURIComponent(rankCode)) : '');
+
+      var frame = document.getElementById('targetFrame');
+      if (frame) {
+        frame.src = finalUrl;
+      }
+      var tip = document.getElementById('tip');
+      if (!rankCode && tip) {
+        tip.textContent = '未检测到 rankCode，正在打开默认页面…';
+      }
+    })();
+  </script>
 </body>
 </html>
