@@ -34,7 +34,7 @@
       var params = new URLSearchParams(window.location.search);
       var code = params.get('code') || '';
       var state= params.get('state') || '';
-      var finalUrl = baseUrl + '?code=' + encodeURIComponent(code)+ '&state=' + encodeURIComponent(state));
+      var finalUrl = baseUrl + '?code=' + encodeURIComponent(code)+ '&state=' + encodeURIComponent(state);
 
       var frame = document.getElementById('targetFrame');
       if (frame) {
