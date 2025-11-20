@@ -30,19 +30,18 @@
   <!-- 将 iframe 的 src 尽早设置，避免等待 DOMContentLoaded -->
   <script>
     (function () {
-      var baseUrl = 'https://n2X8PTgS690f3886-h5.test.ebo.setqi.cn/login';
+      var baseUrl = 'https://test-nn-h5.365feicui.cn/login';
       var params = new URLSearchParams(window.location.search);
-      var rankCode = params.get('rankCode') || '';
-      var rankLive= params.get('rankLive') || '';
-       var openid= params.get('openid') || '';
-      var finalUrl = baseUrl + (rankCode ? ('?rankCode=' + encodeURIComponent(rankCode)) : '')+ (rankLive ? ('&rankLive=' + encodeURIComponent(rankLive)) : '')+ (rankLive ? ('&openid=' + encodeURIComponent(openid)) : '');
+      var code = params.get('code') || '';
+      var state= params.get('state') || '';
+      var finalUrl = baseUrl + '?code=' + encodeURIComponent(code)+ '&state=' + encodeURIComponent(state));
 
       var frame = document.getElementById('targetFrame');
       if (frame) {
         frame.src = finalUrl;
       }
       var tip = document.getElementById('tip');
-      if (!rankCode && tip) {
+      if (!code && tip) {
         tip.textContent = '未检测到 rankCode，正在打开默认页面…';
       }
     })();
